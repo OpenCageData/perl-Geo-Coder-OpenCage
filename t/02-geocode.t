@@ -1,7 +1,12 @@
 use strict;
 use warnings;
+use utf8;
 
 use Test::More;
+
+binmode Test::More->builder->output,         ":encoding(utf8)";
+binmode Test::More->builder->failure_output, ":encoding(utf8)";
+binmode Test::More->builder->todo_output,    ":encoding(utf8)";
 
 use Geo::Coder::OpenCage;
 
@@ -18,9 +23,15 @@ my $Geocoder = Geo::Coder::OpenCage->new(
 );
 
 my %tests = (
+    # Basics
     "Mudgee, Australia" => [ -32.5980702, 149.5886383 ],
     "EC1M 5RF"          => [  51.5201666,  -0.0985142 ],
-    "Donostia"          => [  43.300836,   -1.9809529 ],
+
+    # Encoding in request
+    "Münster"           => [  51.9625101,   7.6251879 ],
+
+    # Encoding in response
+    "Donostia"          => [   43.300836,  -1.9809529 ],
 );
 
 for my $test (sort keys %tests) {
