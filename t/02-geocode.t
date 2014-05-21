@@ -5,8 +5,16 @@ use Test::More;
 
 use Geo::Coder::OpenCage;
 
+my $api_key;
+if ($ENV{GEO_CODER_OPENCAGE_API_KEY}) {
+    $api_key = $ENV{GEO_CODER_OPENCAGE_API_KEY};
+}
+else {
+    plan skip_all => "Set GEO_CODER_OPENCAGE_API_KEY environment variable to run this test";
+}
+
 my $Geocoder = Geo::Coder::OpenCage->new(
-    api_key => "abcde"
+    api_key => $api_key,
 );
 
 my %tests = (
