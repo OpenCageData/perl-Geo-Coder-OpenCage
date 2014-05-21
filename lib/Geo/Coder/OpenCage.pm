@@ -36,7 +36,7 @@ sub geocode {
     my $URL = $self->{url}->clone();
     $URL->query_form(
         key => $self->{api_key},
-        q       => $params{location},
+        q   => $params{location},
     );
 
     my $Response = $self->{ua}->get($URL);
