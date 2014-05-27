@@ -32,6 +32,12 @@ Takes a single named parameter 'location' and returns a result hashref.
 
     my result = $Geocoder->geocode(location => "Mudgee, Australia");
 
+=head1 ENCODING
+
+All strings passed to and recieved from Geo::Coder::OpenCage methods are expected to be character strings, not byte strings.
+
+For more information see L<perlunicode>.
+
 =head1 AUTHOR
 
 Alex Balhatchet, C<alex@lokku.com>
