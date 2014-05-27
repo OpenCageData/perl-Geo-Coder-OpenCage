@@ -4,7 +4,8 @@ use strict;
 use warnings;
 
 use JSON;
-use LWP::UserAgent;
+use HTTP::Tiny;
+use URI;
 use Carp;
 
 sub new {
@@ -17,7 +18,7 @@ sub new {
 
     my $self = {
         api_key => $params{api_key},
-        ua      => LWP::UserAgent->new(agent => "Geo::Coder::OpenCage"),
+        ua      => HTTP::Tiny->new(agent => "Geo::Coder::OpenCage"),
         json    => JSON->new()->utf8(),
         url     => URI->new('http://prototype.opencagedata.com/geocode/v1/json/'),
     };
@@ -39,13 +40,13 @@ sub geocode {
         q   => $params{location},
     );
 
-    my $Response = $self->{ua}->get($URL);
+    my $response = $self->{ua}->get($URL);
 
-    if (!$Response || !$Response->is_success) {
-        croak "failed to fetch '$URL': ", $Response->status_line();
+    if (!$response || !$response->{success}) {
+        croak "failed to fetch '$URL': ", $response->{reason};
     }
 
-    my $raw_content = $Response->decoded_content;
+    my $raw_content = $response->{content};
 
     my $result = $self->{json}->decode($raw_content);
 
