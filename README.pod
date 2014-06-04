@@ -48,7 +48,7 @@ Alex Balhatchet, C<alex@lokku.com>
 
 Copyright 2014 Lokku Ltd <cpan@lokku.com>
 
-Please check out all our open source work over at https://github.com/lokku 
+Please check out all our open source work over at https://github.com/lokku
 and our developer blog: http://devblog.nestoria.com
 
 Thanks!
