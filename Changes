@@ -1,4 +1,7 @@
 Revision history for Geo-Coder-OpenCage
 
+0.02    2014-06-05
+        - Updated URL from prototype.opencagedata.com to api.opencagedata.com
+
 0.01    2014-05-20
         - Initial release.
