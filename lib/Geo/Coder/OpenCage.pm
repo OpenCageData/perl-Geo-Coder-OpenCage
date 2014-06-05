@@ -20,7 +20,7 @@ sub new {
         api_key => $params{api_key},
         ua      => HTTP::Tiny->new(agent => "Geo::Coder::OpenCage"),
         json    => JSON->new()->utf8(),
-        url     => URI->new('http://prototype.opencagedata.com/geocode/v1/json/'),
+        url     => URI->new('http://api.opencagedata.com/geocode/v1/json/'),
     };
 
     return bless $self, $class;
