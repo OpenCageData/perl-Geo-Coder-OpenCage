@@ -78,6 +78,8 @@ Geo::Coder::OpenCage - Geocode addresses with the OpenCage Geocoder API
 
 This module provides an interface to the OpenCage geocoding service.
 
+For full details on the API visit L<http://geocoder.opencagedata.com/api.html>.
+
 =head1 SYNOPSIS
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
