@@ -89,7 +89,7 @@ You can get your API key from http://geocoder.opencagedata.com
 
 Takes a single named parameter 'location' and returns a result hashref.
 
-    my result = $Geocoder->geocode(location => "Mudgee, Australia");
+    my $result = $Geocoder->geocode(location => "Mudgee, Australia");
 
 =head1 ENCODING
 
