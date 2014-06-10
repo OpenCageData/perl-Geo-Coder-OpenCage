@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.04    2014-06-10
+        - Added Pod::Perldoc 3.21 as a dependency
+
 0.03    2014-06-10
         - Added support for the 'language' and 'country' parameters
         - Added lots of docs about supported and unsupported API parameters
