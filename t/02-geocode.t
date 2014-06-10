@@ -22,22 +22,61 @@ my $Geocoder = Geo::Coder::OpenCage->new(
     api_key => $api_key,
 );
 
-my %tests = (
+my @tests = (
     # Basics
-    "Mudgee, Australia" => [ -32.5980702, 149.5886383 ],
-    "EC1M 5RF"          => [  51.5201666,  -0.0985142 ],
+    {
+        input => {
+            location => "Mudgee, Australia",
+        },
+        output => [ -32.5980702, 149.5886383 ],
+    },
+    {
+        input => {
+            location => "EC1M 5RF",
+        },
+        output => [ 51.5201666,  -0.0985142 ],
+    },
 
     # Encoding in request
-    "Münster"           => [  51.9625101,   7.6251879 ],
+    {
+        input => {
+            location => "Münster",
+        },
+        output => [ 51.9625101,   7.6251879 ],
+    },
 
     # Encoding in response
-    "Donostia"          => [   43.300836,  -1.9809529 ],
+    {
+        input => {
+            location => "Donostia",
+        },
+        output => [ 43.300836,  -1.9809529 ],
+    },
+
+    # language
+    {
+        input => {
+            location => "東京",
+            language => "jp",
+        },
+        output => [ 35.689506, 139.6917 ],
+    },
+
+    # country
+    {
+        input => {
+            location => "Madrid",
+            country => "esp",
+        },
+        output => [ 40.383333, -3.716667 ],
+    },
 );
 
-for my $test (sort keys %tests) {
-    ok $test, "Trying to geocode '$test'";
+for my $test (@tests) {
+    my $location = $test->{input}{location};
+    ok $location, "Trying to geocode '$location'";
 
-    my $result = $Geocoder->geocode(location => $test);
+    my $result = $Geocoder->geocode(%{ $test->{input} });
 
     ok $result, '... got a sane response';
 
@@ -49,8 +88,8 @@ for my $test (sort keys %tests) {
     my $good_results = 0;
     for my $individual_result (@results) {
         $good_results++ if (
-            (abs($individual_result->{geometry}{lat} - $tests{$test}[0]) < 0.05) &&
-            (abs($individual_result->{geometry}{lng} - $tests{$test}[1]) < 0.05)
+            (abs($individual_result->{geometry}{lat} - $test->{output}[0]) < 0.05) &&
+            (abs($individual_result->{geometry}{lng} - $test->{output}[1]) < 0.05)
         );
     }
     ok $good_results, "... got at least one ($good_results) results where we expect them to be";
