@@ -56,10 +56,10 @@ my @tests = (
     # language
     {
         input => {
-            location => "東京",
+            location => "東京都",
             language => "jp",
         },
-        output => [ 35.689506, 139.6917 ],
+        output => [ 35.6823815, 139.7530053 ],
     },
 
     # country

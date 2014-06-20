@@ -64,6 +64,34 @@ sub geocode {
     return $result;
 }
 
+sub reverse_geocode {
+    my $self = shift;
+    my %params = @_;
+
+    croak "lat is a required parameter" if !$params{lat};
+    croak "lng is a required parameter" if !$params{lng};
+
+    $params{q} = join(",", delete @params{'lat','lng'});
+
+    my $URL = $self->{url}->clone();
+    $URL->query_form(
+        key => $self->{api_key},
+        %params,
+    );
+
+    my $response = $self->{ua}->get($URL);
+
+    if (!$response || !$response->{success}) {
+        croak "failed to fetch '$URL': ", $response->{reason};
+    }
+
+    my $raw_content = $response->{content};
+
+    my $result = $self->{json}->decode($raw_content);
+
+    return $result;
+}
+
 1;
 
 __END__
@@ -154,6 +182,14 @@ As a full example:
         language => "ru",
         country => "rus",
     );
+
+=head2 reverse_geocode
+
+Takes two named parameters 'lat' and 'lng' and returns a result hashref.
+
+    my $result = $Geocoder->reverse_geocode(lat => -22.6792, lng => 14.5272);
+
+This supports the optional 'language' parameter in the same way that geocode() does.
 
 =head1 ENCODING
 
