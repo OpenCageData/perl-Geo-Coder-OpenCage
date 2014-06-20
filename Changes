@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.05    2014-06-20
+        - Added reverse geocoding support
+
 0.04    2014-06-10
         - Added Pod::Perldoc 3.21 as a dependency
 
