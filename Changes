@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.06    2015-04-14
+        - Github URL (organization) changed
+        
 0.05    2014-06-20
         - Added reverse geocoding support
 

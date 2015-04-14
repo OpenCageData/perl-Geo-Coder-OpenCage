@@ -12,7 +12,7 @@ To install into your Perl environment you can use the following command:
 
 Alternatively to work on the source:
 
-    $ git clone https://github.com/lokku/perl-Geo-Coder-OpenCage.git
+    $ git clone https://github.com/opencagedata/perl-Geo-Coder-OpenCage.git
     $ cd perl-Geo-Coder-OpenCage
     $ cpan Dist::Zilla
     $ dzil authordeps | xargs cpan
