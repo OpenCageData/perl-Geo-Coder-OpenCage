@@ -66,7 +66,7 @@ my @tests = (
     {
         input => {
             location => "Madrid",
-            country => "esp",
+            countrycode => "es",
         },
         output => [ 40.383333, -3.716667 ],
     },
