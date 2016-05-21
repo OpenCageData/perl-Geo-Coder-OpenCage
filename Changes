@@ -1,5 +1,11 @@
 Revision history for Geo-Coder-OpenCage
 
+0.07    2016-05-21
+        - support the API's various optional parameters
+          see: https://geocoder.opencagedata.com/api#forward-opt
+        - pod update
+        - 'countrycode', not 'country' as per the API
+        
 0.06    2015-04-14
         - Github URL (organization) changed
         

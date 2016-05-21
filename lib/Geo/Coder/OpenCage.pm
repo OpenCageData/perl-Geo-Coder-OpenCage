@@ -27,6 +27,17 @@ sub new {
     return bless $self, $class;
 }
 
+
+my @valid_params = qw(
+    add_request
+    countrycode
+    language
+    limit
+    min_confidence
+    no_annotations
+    no_dedupe
+    q
+);
 sub geocode {
     my $self = shift;
     my %params = @_;
@@ -38,8 +49,8 @@ sub geocode {
         croak "location is a required parameter for geocode()";
     }
 
-    for my $k (keys %params) {
-        if (none { $k eq $_ } qw(q country language)) {
+    for my $k (keys %params){
+        if (none { $k eq $_ } @valid_params ) {
             warn "Unknown geocode parameter: $k";
             delete $params{$k};
         }
@@ -86,10 +97,8 @@ sub reverse_geocode {
     }
 
     my $raw_content = $response->{content};
+    return $self->{json}->decode($raw_content);
 
-    my $result = $self->{json}->decode($raw_content);
-
-    return $result;
 }
 
 1;
@@ -106,7 +115,7 @@ Geo::Coder::OpenCage - Geocode addresses with the OpenCage Geocoder API
 
 This module provides an interface to the OpenCage geocoding service.
 
-For full details on the API visit L<http://geocoder.opencagedata.com/api.html>.
+For full details on the API visit L<http://geocoder.opencagedata.com/api>.
 
 =head1 SYNOPSIS
 
@@ -135,6 +144,9 @@ supports and some of which it doesn't.
 
 =item Supported Parameters
 
+please see the geocoder documentation almost all of the various optional 
+parameters are supported
+
 =over 2
 
 =item language
@@ -142,7 +154,7 @@ supports and some of which it doesn't.
 An IETF format language code (such as es for Spanish or pt-BR for Brazilian
 Portuguese); if this is omitted a code of en (English) will be assumed.
 
-=item country
+=item countrycode
 
 Provides the geocoder with a hint to the country that the query resides in.
 This value will help the geocoder but will not restrict the possible results to
@@ -167,10 +179,6 @@ the API directly using HTTP::Tiny or similar user agent module.
 This module always parses the response as a Perl data structure, so the jsonp
 option is never used.
 
-=item fields
-
-This module always grabs all of the data, and never uses the fields option.
-
 =back
 
 =back
@@ -180,7 +188,7 @@ As a full example:
     my $result = $Geocoder->geocode(
         location => "Псковская улица, Санкт-Петербург, Россия",
         language => "ru",
-        country => "rus",
+        countrycode => "ru",
     );
 
 =head2 reverse_geocode
@@ -199,16 +207,15 @@ For more information see L<perlunicode>.
 
 =head1 AUTHOR
 
-Alex Balhatchet, C<alex@lokku.com>
+Ed Freyfogle 
 
 =cut
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2014 Lokku Ltd <cpan@lokku.com>
+Copyright 2016 OpenCage Data Ltd <cpan@opencagedata.com>
 
-Please check out all our open source work over at https://github.com/lokku
-and our developer blog: http://devblog.nestoria.com
+Please check out all our open source work over at https://github.com/opencagedata and our developer blog: http://blog.opencagedata.com
 
 Thanks!
 
