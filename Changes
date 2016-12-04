@@ -1,5 +1,9 @@
 Revision history for Geo-Coder-OpenCage
 
+0.08    2016-12-04
+        - use https instead of http
+        - support 'no_record' optional param
+        
 0.07    2016-05-21
         - support the API's various optional parameters
           see: https://geocoder.opencagedata.com/api#forward-opt
