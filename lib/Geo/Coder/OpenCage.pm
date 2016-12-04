@@ -21,21 +21,22 @@ sub new {
         api_key => $params{api_key},
         ua      => HTTP::Tiny->new(agent => "Geo::Coder::OpenCage"),
         json    => JSON->new()->utf8(),
-        url     => URI->new('http://api.opencagedata.com/geocode/v1/json/'),
+        url     => URI->new('https://api.opencagedata.com/geocode/v1/json/'),
     };
-
     return bless $self, $class;
 }
 
 
 my @valid_params = qw(
     add_request
+    bounds
     countrycode
     language
     limit
     min_confidence
     no_annotations
     no_dedupe
+    no_record
     q
 );
 sub geocode {
