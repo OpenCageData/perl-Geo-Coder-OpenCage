@@ -206,6 +206,10 @@ All strings passed to and recieved from Geo::Coder::OpenCage methods are expecte
 
 For more information see L<perlunicode>.
 
+=head1 SEE ALSO
+
+This module was featured in the 2016 Perl Advent Calendar. L<Read the article|http://perladvent.org/2016/2016-12-08.html>.
+
 =head1 AUTHOR
 
 Ed Freyfogle 
