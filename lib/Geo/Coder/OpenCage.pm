@@ -218,9 +218,9 @@ Ed Freyfogle
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2016 OpenCage Data Ltd <cpan@opencagedata.com>
+Copyright 2017 OpenCage Data Ltd <cpan@opencagedata.com>
 
-Please check out all our open source work over at https://github.com/opencagedata and our developer blog: http://blog.opencagedata.com
+Please check out all our open source work over at L<https://github.com/opencagedata> and our developer blog: L<http://blog.opencagedata.com>
 
 Thanks!
 
