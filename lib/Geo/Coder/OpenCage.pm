@@ -26,9 +26,10 @@ sub new {
     return bless $self, $class;
 }
 
-
+# see list: https://geocoder.opencagedata.com/api#forward-opt
 my @valid_params = qw(
     add_request
+    abbrv
     bounds
     countrycode
     language
