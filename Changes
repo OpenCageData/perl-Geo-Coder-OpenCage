@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.11    2017-09-26
+        - dont die if request fails, instead warn and return undef
+
 0.10    2017-05-05
         - add support for 'abbrv' param, see:
         http://blog.opencagedata.com/post/160294347883/shrtr-pls

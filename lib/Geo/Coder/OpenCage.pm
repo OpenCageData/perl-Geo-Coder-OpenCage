@@ -28,8 +28,8 @@ sub new {
 
 # see list: https://geocoder.opencagedata.com/api#forward-opt
 my @valid_params = qw(
-    add_request
     abbrv
+    add_request
     bounds
     countrycode
     language
@@ -67,14 +67,12 @@ sub geocode {
     my $response = $self->{ua}->get($URL);
 
     if (!$response || !$response->{success}) {
-        croak "failed to fetch '$URL': ", $response->{reason};
+        warn "failed to fetch '$URL': ", $response->{reason};        
+        return undef;
     }
-
+    
     my $raw_content = $response->{content};
-
-    my $result = $self->{json}->decode($raw_content);
-
-    return $result;
+    return $self->{json}->decode($raw_content);
 }
 
 sub reverse_geocode {
@@ -95,12 +93,12 @@ sub reverse_geocode {
     my $response = $self->{ua}->get($URL);
 
     if (!$response || !$response->{success}) {
-        croak "failed to fetch '$URL': ", $response->{reason};
+        warn "failed to fetch '$URL': ", $response->{reason};
+        return undef;
     }
 
     my $raw_content = $response->{content};
     return $self->{json}->decode($raw_content);
-
 }
 
 1;
@@ -117,7 +115,7 @@ Geo::Coder::OpenCage - Geocode addresses with the OpenCage Geocoder API
 
 This module provides an interface to the OpenCage geocoding service.
 
-For full details on the API visit L<http://geocoder.opencagedata.com/api>.
+For full details on the API visit L<https://geocoder.opencagedata.com/api>.
 
 =head1 SYNOPSIS
 
@@ -131,13 +129,15 @@ For full details on the API visit L<http://geocoder.opencagedata.com/api>.
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
-You can get your API key from http://geocoder.opencagedata.com
+You can get your API key from https://geocoder.opencagedata.com
 
 =head2 geocode
 
 Takes a single named parameter 'location' and returns a result hashref.
 
     my $result = $Geocoder->geocode(location => "Mudgee, Australia");
+
+warns and returns undef if the query fails for some reason
 
 The OpenCage Geocoder has a few optional parameters, some of which this module
 supports and some of which it doesn't.
@@ -221,7 +221,7 @@ Ed Freyfogle
 
 Copyright 2017 OpenCage Data Ltd <cpan@opencagedata.com>
 
-Please check out all our open source work over at L<https://github.com/opencagedata> and our developer blog: L<http://blog.opencagedata.com>
+Please check out all our open source work over at L<https://github.com/opencagedata> and our developer blog: L<https://blog.opencagedata.com>
 
 Thanks!
 
