@@ -117,13 +117,13 @@ __END__
 
 =head1 NAME
 
-Geo::Coder::OpenCage - Geocode addresses with the OpenCage Geocoder API
+Geo::Coder::OpenCage - Geocode coordinates and addresses with the OpenCage Geocoder
 
 =head1 DESCRIPTION
 
 This module provides an interface to the OpenCage geocoding service.
 
-For full details on the API visit L<https://geocoder.opencagedata.com/api>.
+For full details of the API visit L<https://geocoder.opencagedata.com/api>.
 
 =head1 SYNOPSIS
 
@@ -137,7 +137,7 @@ For full details on the API visit L<https://geocoder.opencagedata.com/api>.
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
-You can get your API key from https://geocoder.opencagedata.com
+Get your API key from L<https://geocoder.opencagedata.com>
 
 =head2 geocode
 
@@ -145,10 +145,9 @@ Takes a single named parameter 'location' and returns a result hashref.
 
     my $result = $Geocoder->geocode(location => "Mudgee, Australia");
 
-warns and returns undef if the query fails for some reason
+warns and returns undef if the query fails for some reason.
 
-The OpenCage Geocoder has a few optional parameters, some of which this module
-supports and some of which it doesn't.
+The OpenCage Geocoder has a few optional parameters
 
 =over 1
 
@@ -183,11 +182,6 @@ the ISO 3166-1 Alpha 2standard.
 
 =over 2
 
-=item format
-
-This module only ever uses the JSON format. For other formats you should access
-the API directly using HTTP::Tiny or similar user agent module.
-
 =item jsonp
 
 This module always parses the response as a Perl data structure, so the jsonp
@@ -211,7 +205,7 @@ Takes two named parameters 'lat' and 'lng' and returns a result hashref.
 
     my $result = $Geocoder->reverse_geocode(lat => -22.6792, lng => 14.5272);
 
-This supports the optional 'language' parameter in the same way that geocode() 
+This method supports the optional parameters in the same way that geocode() 
 does.
 
 =head1 ENCODING
