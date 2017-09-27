@@ -2,6 +2,7 @@ package Geo::Coder::OpenCage;
 
 use strict;
 use warnings;
+use feature qw(say);
 
 use JSON;
 use HTTP::Tiny;
@@ -40,15 +41,17 @@ my @valid_params = qw(
     no_record
     q
 );
+
 sub geocode {
     my $self = shift;
     my %params = @_;
 
-    if ($params{location}) {
+    if (defined($params{location})) {
         $params{q} = delete $params{location};
     }
     else {
-        croak "location is a required parameter for geocode()";
+        warn "location is a required parameter for geocode()";
+        return undef;
     }
 
     for my $k (keys %params){
@@ -79,26 +82,16 @@ sub reverse_geocode {
     my $self = shift;
     my %params = @_;
 
-    croak "lat is a required parameter" if !$params{lat};
-    croak "lng is a required parameter" if !$params{lng};
-
-    $params{q} = join(",", delete @params{'lat','lng'});
-
-    my $URL = $self->{url}->clone();
-    $URL->query_form(
-        key => $self->{api_key},
-        %params,
-    );
-
-    my $response = $self->{ua}->get($URL);
-
-    if (!$response || !$response->{success}) {
-        warn "failed to fetch '$URL': ", $response->{reason};
-        return undef;
+    say "in reverse";
+    foreach my $k (qw(lat lng)){
+        if (!defined($params{$k})){
+            warn "$k is a required parameter";
+            return undef;
+        }
     }
 
-    my $raw_content = $response->{content};
-    return $self->{json}->decode($raw_content);
+    $params{location} = join(',', delete @params{'lat','lng'});
+    return $self->geocode(%params);
 }
 
 1;
@@ -146,8 +139,8 @@ supports and some of which it doesn't.
 
 =item Supported Parameters
 
-please see the geocoder documentation almost all of the various optional 
-parameters are supported
+please see L<the OpenCage geocoder documentation|https://geocoder.opencagedata.com/api>. Most of 
+L<the various optional parameters|https://geocoder.opencagedata.com/api#forward-opt> are supported. For example:
 
 =over 2
 
@@ -156,14 +149,18 @@ parameters are supported
 An IETF format language code (such as es for Spanish or pt-BR for Brazilian
 Portuguese); if this is omitted a code of en (English) will be assumed.
 
+=item limit
+
+Limits the maximum number of results returned. Default is 10.  
+
 =item countrycode
 
 Provides the geocoder with a hint to the country that the query resides in.
 This value will help the geocoder but will not restrict the possible results to
 the supplied country.
 
-The country code is a 3 character code as defined by the ISO 3166-1 Alpha 3
-standard.
+The country code is a comma seperated list of 2 character code as defined by 
+the ISO 3166-1 Alpha 2standard.
 
 =back
 
@@ -199,11 +196,13 @@ Takes two named parameters 'lat' and 'lng' and returns a result hashref.
 
     my $result = $Geocoder->reverse_geocode(lat => -22.6792, lng => 14.5272);
 
-This supports the optional 'language' parameter in the same way that geocode() does.
+This supports the optional 'language' parameter in the same way that geocode() 
+does.
 
 =head1 ENCODING
 
-All strings passed to and recieved from Geo::Coder::OpenCage methods are expected to be character strings, not byte strings.
+All strings passed to and recieved from Geo::Coder::OpenCage methods are 
+expected to be character strings, not byte strings.
 
 For more information see L<perlunicode>.
 
