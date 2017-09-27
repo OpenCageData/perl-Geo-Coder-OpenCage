@@ -2,12 +2,14 @@ use strict;
 use warnings;
 use utf8;
 
+
 use Test::More;
 
 binmode Test::More->builder->output,         ":encoding(utf8)";
 binmode Test::More->builder->failure_output, ":encoding(utf8)";
 binmode Test::More->builder->todo_output,    ":encoding(utf8)";
 
+use lib './lib';  # actually use the module, not other versions installed
 use Geo::Coder::OpenCage;
 
 my $api_key;

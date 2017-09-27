@@ -4,6 +4,7 @@ use warnings;
 use Test::More;
 use Test::Exception;
 
+use lib './lib';  # actually use the module, not other versions installed
 use Geo::Coder::OpenCage;
 
 lives_ok {
