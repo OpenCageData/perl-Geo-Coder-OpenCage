@@ -77,7 +77,7 @@ for my $test (@tests) {
             }
         }
     }
-    ok $good_results, "... got at least one ($good_results) results with the name we expect ($test->{output})"
+    ok $good_results, "... got at least one ($good_results) results with the name we expect ($test->{output})";
 }
 
 {

@@ -11,7 +11,7 @@ lives_ok {
     my $Geocoder = Geo::Coder::OpenCage->new(
         api_key => "abcde"
     );
-    ok $Geocoder, 'created geocoder object with dummy api key'
+    ok $Geocoder, 'created geocoder object with dummy api key';
 } 'new() lived with api key';
 
 dies_ok {
