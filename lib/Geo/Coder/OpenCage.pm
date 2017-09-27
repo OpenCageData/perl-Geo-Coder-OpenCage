@@ -4,11 +4,11 @@ use strict;
 use warnings;
 use feature qw(say);
 
-use JSON;
-use HTTP::Tiny;
-use URI;
 use Carp;
-use List::MoreUtils qw(none);
+use Data::Dumper;
+use HTTP::Tiny;
+use JSON;
+use URI;
 
 sub new {
     my $class = shift;
@@ -28,18 +28,21 @@ sub new {
 }
 
 # see list: https://geocoder.opencagedata.com/api#forward-opt
-my @valid_params = qw(
-    abbrv
-    add_request
-    bounds
-    countrycode
-    language
-    limit
-    min_confidence
-    no_annotations
-    no_dedupe
-    no_record
-    q
+my %valid_params = (
+    abbrv            => 1,
+    add_request      => 1,
+    bounds           => 1,
+    countrycode      => 1,
+    format           => 0,    
+    jsonp            => 0,
+    language         => 1,
+    limit            => 1,
+    min_confidence   => 1,
+    no_annotations   => 1,
+    no_dedupe        => 1,
+    no_record        => 1,
+    q                => 1,
+    pretty           => 1,  # makes no actual difference
 );
 
 sub geocode {
@@ -55,9 +58,13 @@ sub geocode {
     }
 
     for my $k (keys %params){
-        if (none { $k eq $_ } @valid_params ) {
+        if (!defined($params{$k})){
             warn "Unknown geocode parameter: $k";
             delete $params{$k};
+        }
+        if (!$params{$k}){  # is a real parameter but we dont support it
+            warn "Unsupported geocode parameter: $k";
+            delete $params{$k};            
         }
     }
 
@@ -69,20 +76,28 @@ sub geocode {
 
     my $response = $self->{ua}->get($URL);
 
-    if (!$response || !$response->{success}) {
+    if (!$response){ 
         warn "failed to fetch '$URL': ", $response->{reason};        
         return undef;
     }
-    
-    my $raw_content = $response->{content};
-    return $self->{json}->decode($raw_content);
+
+    my $rh_content = $self->{json}->decode( $response->{content} );
+
+    if (!$response->{success}) {
+        warn "response when requesting '$URL': "
+            . $rh_content->{status}{code}
+            . ', '
+            . $rh_content->{status}{message};
+        return undef;
+    }
+   
+    return $rh_content;
 }
 
 sub reverse_geocode {
     my $self = shift;
     my %params = @_;
 
-    say "in reverse";
     foreach my $k (qw(lat lng)){
         if (!defined($params{$k})){
             warn "$k is a required parameter";

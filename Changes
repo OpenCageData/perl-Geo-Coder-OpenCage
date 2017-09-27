@@ -1,7 +1,17 @@
 Revision history for Geo-Coder-OpenCage
 
+0.12    2017-09-27
+        - internal code refactor, remove duplicate code
+        - better docs, remove various points of confusion
+        - no longer die if:
+          - no query is provided
+          - request fails
+          - request returns non-200 response code
+          instead warn and return undef
+        - remove dependency on List::MoreUtils
+
 0.11    2017-09-26
-        - dont die if request fails, instead warn and return undef
+        - don't die if request fails, instead warn and return undef
 
 0.10    2017-05-05
         - add support for 'abbrv' param, see:

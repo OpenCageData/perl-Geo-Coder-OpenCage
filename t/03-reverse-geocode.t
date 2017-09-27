@@ -1,9 +1,8 @@
 use strict;
 use warnings;
 use utf8;
-
-
 use Test::More;
+use Test::Warn;
 
 binmode Test::More->builder->output,         ":encoding(utf8)";
 binmode Test::More->builder->failure_output, ":encoding(utf8)";
@@ -79,6 +78,18 @@ for my $test (@tests) {
         }
     }
     ok $good_results, "... got at least one ($good_results) results with the name we expect ($test->{output})"
+}
+
+{
+
+    my $result;
+    warning_like
+        { $result = $Geocoder->reverse_geocode('lat'=>1000,'lng'=>1000); }
+        [ qr/400, invalid coordinates/ ],
+        " got invalid coordinates warning ";
+
+    is($result, undef, 'correctly returned undef for bad coords');
+
 }
 
 done_testing();
