@@ -1,5 +1,9 @@
 Revision history for Geo-Coder-OpenCage
 
+0.18    2017-09-28
+        - various dist.ini tweaks to resolve bugs found by CPAN Testers
+          no code changes
+
 0.12    2017-09-27
         - internal code refactor, remove duplicate code
         - better docs, remove various points of confusion
@@ -7,6 +11,7 @@ Revision history for Geo-Coder-OpenCage
           - no query is provided
           - request fails
           - request returns non-200 response code
+          
           instead warn and return undef
         - remove dependency on List::MoreUtils
 
