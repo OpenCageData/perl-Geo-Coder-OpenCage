@@ -2,7 +2,6 @@ package Geo::Coder::OpenCage;
 
 use strict;
 use warnings;
-use feature qw(say);
 
 use Carp;
 use Data::Dumper;
