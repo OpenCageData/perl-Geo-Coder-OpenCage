@@ -213,7 +213,7 @@ For more information see L<perlunicode>.
 
 =head1 SEE ALSO
 
-This module was featured in the 2016 Perl Advent Calendar. L<Read the article|http://perladvent.org/2016/2016-12-08.html>.
+This module was L<featured in the 2016 Perl Advent Calendar|http://perladvent.org/2016/2016-12-08.html>.
 
 Ed Freyfogle from the OpenCage team gave L<an interview with Built in Perl about how Perl is used at OpenCage|http://blog.builtinperl.com/post/opencage-data-geocoding-in-perl>.
 
@@ -227,7 +227,8 @@ Ed Freyfogle
 
 Copyright 2017 OpenCage Data Ltd <cpan@opencagedata.com>
 
-Please check out all our open source work over at L<https://github.com/opencagedata> and our developer blog: L<https://blog.opencagedata.com>
+Please check out all our open source work over at L<https://github.com/opencagedata>
+and our developer blog: L<https://blog.opencagedata.com>
 
 Thanks!
 
