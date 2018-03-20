@@ -3,9 +3,11 @@
 
 # Geo::Coder::OpenCage
 
-This module provides an interface to the OpenCage geocoding service. For more details see http://geocoder.opencagedata.com/api.html
+This module provides an interface to the OpenCage geocoding service. 
+For more details see http://geocoder.opencagedata.com/api
 
-For docs please see [the Geo::Coder::OpenCage page on search.metacpan.org](https://metacpan.org/pod/Geo::Coder::OpenCage) or `perldoc Geo::Coder::OpenCage`.
+For docs please see [the Geo::Coder::OpenCage page on search.metacpan.org](https://metacpan.org/pod/Geo::Coder::OpenCage)
+or `perldoc Geo::Coder::OpenCage`.
 
 ## INSTALLATION
 
@@ -26,4 +28,5 @@ Alternatively to work on the source:
 
 Copyright OpenCage Data Ltd <cpan@opencagedata.com>
 
-This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself, either Perl version 5.16 or, at your option, any later version of Perl 5 you may have available.
+This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself,
+either Perl version 5.16 or, at your option, any later version of Perl 5 you may have available.
