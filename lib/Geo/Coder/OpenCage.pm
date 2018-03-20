@@ -75,7 +75,7 @@ sub geocode {
 
     my $response = $self->{ua}->get($URL);
 
-    if (!$response){ 
+    if (!$response){
         warn "failed to fetch '$URL': ", $response->{reason};
         return undef;
     }
@@ -163,7 +163,7 @@ Portuguese); if this is omitted a code of en (English) will be assumed.
 
 =item limit
 
-Limits the maximum number of results returned. Default is 10.  
+Limits the maximum number of results returned. Default is 10.
 
 =item countrycode
 
