@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/OpenCageData/perl-Geo-Coder-OpenCage.svg?branch=master)](https://travis-ci.org/OpenCageData/perl-Geo-Code-OpenCage)
+
 # Geo::Coder::OpenCage
 
 This module provides an interface to the OpenCage geocoding service. For more details see http://geocoder.opencagedata.com/api.html
