@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/OpenCageData/perl-Geo-Coder-OpenCage.svg?branch=master)](https://travis-ci.org/OpenCageData/perl-Geo-Code-OpenCage)
+[![Build Status](https://travis-ci.org/OpenCageData/perl-Geo-Coder-OpenCage.svg?branch=master)](https://travis-ci.org/OpenCageData/perl-Geo-Code-OpenCage) [![Kritika Analysis Status](https://kritika.io/users/OpenCage/repos/2893424605329847/heads/master/status.svg)](https://kritika.io/orgs/OpenCage/repos/2893424605329847/heads/master/)
 
 # Geo::Coder::OpenCage
 
