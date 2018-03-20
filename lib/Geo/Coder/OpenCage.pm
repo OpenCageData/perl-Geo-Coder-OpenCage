@@ -32,7 +32,7 @@ my %valid_params = (
     add_request      => 1,
     bounds           => 1,
     countrycode      => 1,
-    format           => 0,    
+    format           => 0,
     jsonp            => 0,
     language         => 1,
     limit            => 1,
@@ -63,7 +63,7 @@ sub geocode {
         }
         if (!$params{$k}){  # is a real parameter but we dont support it
             warn "Unsupported geocode parameter: $k";
-            delete $params{$k};            
+            delete $params{$k};
         }
     }
 
@@ -76,7 +76,7 @@ sub geocode {
     my $response = $self->{ua}->get($URL);
 
     if (!$response){ 
-        warn "failed to fetch '$URL': ", $response->{reason};        
+        warn "failed to fetch '$URL': ", $response->{reason};
         return undef;
     }
 
@@ -89,7 +89,6 @@ sub geocode {
             . $rh_content->{status}{message};
         return undef;
     }
-   
     return $rh_content;
 }
 
@@ -152,7 +151,7 @@ The OpenCage Geocoder has a few optional parameters
 
 =item Supported Parameters
 
-please see L<the OpenCage geocoder documentation|https://geocoder.opencagedata.com/api>. Most of 
+please see L<the OpenCage geocoder documentation|https://geocoder.opencagedata.com/api>. Most of
 L<the various optional parameters|https://geocoder.opencagedata.com/api#forward-opt> are supported. For example:
 
 =over 2
@@ -172,8 +171,7 @@ Provides the geocoder with a hint to the country that the query resides in.
 This value will help the geocoder but will not restrict the possible results to
 the supplied country.
 
-The country code is a comma seperated list of 2 character code as defined by 
-the ISO 3166-1 Alpha 2standard.
+The country code is a comma seperated list of 2 character code as defined by the ISO 3166-1 Alpha 2 standard.
 
 =back
 
@@ -204,12 +202,11 @@ Takes two named parameters 'lat' and 'lng' and returns a result hashref.
 
     my $result = $Geocoder->reverse_geocode(lat => -22.6792, lng => 14.5272);
 
-This method supports the optional parameters in the same way that geocode() 
-does.
+This method supports the optional parameters in the same way that geocode() does.
 
 =head1 ENCODING
 
-All strings passed to and recieved from Geo::Coder::OpenCage methods are 
+All strings passed to and recieved from Geo::Coder::OpenCage methods are
 expected to be character strings, not byte strings.
 
 For more information see L<perlunicode>.
@@ -218,11 +215,11 @@ For more information see L<perlunicode>.
 
 This module was featured in the 2016 Perl Advent Calendar. L<Read the article|http://perladvent.org/2016/2016-12-08.html>.
 
-Ed Freyfogle from the OpenCage team gave L<an interview with Built in Perl about how Perl is used at OpenCage|http://blog.builtinperl.com/post/opencage-data-geocoding-in-perl>. 
+Ed Freyfogle from the OpenCage team gave L<an interview with Built in Perl about how Perl is used at OpenCage|http://blog.builtinperl.com/post/opencage-data-geocoding-in-perl>.
 
 =head1 AUTHOR
 
-Ed Freyfogle 
+Ed Freyfogle
 
 =cut
 
