@@ -1,11 +1,11 @@
 
-[![Build Status](https://travis-ci.org/OpenCageData/perl-Geo-Coder-OpenCage.svg?branch=master)](https://travis-ci.org/OpenCageData/perl-Geo-Code-OpenCage) 
+[![Build Status](https://travis-ci.org/OpenCageData/perl-Geo-Coder-OpenCage.svg?branch=master)](https://travis-ci.org/OpenCageData/perl-Geo-Code-OpenCage)
 [![Kritika Analysis Status](https://kritika.io/users/OpenCage/repos/2893424605329847/heads/master/status.svg)](https://kritika.io/orgs/OpenCage/repos/2893424605329847/heads/master/)
 [![CPAN](https://img.shields.io/cpan/v/Geo-Coder-OpenCage.svg?style=flat-square)](https://metacpan.org/pod/Geo::Coder::OpenCage)
 
 # Geo::Coder::OpenCage
 
-This module provides an interface to the OpenCage geocoding service. 
+This module provides an interface to the OpenCage geocoding service.
 For more details see http://geocoder.opencagedata.com/api
 
 For docs please see [the Geo::Coder::OpenCage page on search.metacpan.org](https://metacpan.org/pod/Geo::Coder::OpenCage)
