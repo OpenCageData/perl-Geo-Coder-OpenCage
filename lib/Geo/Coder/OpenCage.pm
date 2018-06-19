@@ -26,7 +26,7 @@ sub new {
     return bless $self, $class;
 }
 
-# see list: https://geocoder.opencagedata.com/api#forward-opt
+# see list: https://opencagedata.com/api#forward-opt
 my %valid_params = (
     abbrv            => 1,
     add_request      => 1,
@@ -121,7 +121,7 @@ Geo::Coder::OpenCage - Geocode coordinates and addresses with the OpenCage Geoco
 
 This module provides an interface to the OpenCage geocoding service.
 
-For full details of the API visit L<https://geocoder.opencagedata.com/api>.
+For full details of the API visit L<https://opencagedata.com/api>.
 
 =head1 SYNOPSIS
 
@@ -135,7 +135,7 @@ For full details of the API visit L<https://geocoder.opencagedata.com/api>.
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
-Get your API key from L<https://geocoder.opencagedata.com>
+Get your API key from L<https://opencagedata.com>
 
 =head2 geocode
 
@@ -151,8 +151,8 @@ The OpenCage Geocoder has a few optional parameters
 
 =item Supported Parameters
 
-please see L<the OpenCage geocoder documentation|https://geocoder.opencagedata.com/api>. Most of
-L<the various optional parameters|https://geocoder.opencagedata.com/api#forward-opt> are supported. For example:
+please see L<the OpenCage geocoder documentation|https://opencagedata.com/api>. Most of
+L<the various optional parameters|https://opencagedata.com/api#forward-opt> are supported. For example:
 
 =over 2
 
