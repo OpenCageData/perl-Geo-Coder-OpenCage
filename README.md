@@ -6,7 +6,7 @@
 # Geo::Coder::OpenCage
 
 This module provides an interface to the OpenCage geocoding service.
-For more details see http://geocoder.opencagedata.com/api
+For more details see https://opencagedata.com/api
 
 For docs please see [the Geo::Coder::OpenCage page on search.metacpan.org](https://metacpan.org/pod/Geo::Coder::OpenCage)
 or `perldoc Geo::Coder::OpenCage`.
