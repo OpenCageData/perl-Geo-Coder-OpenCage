@@ -1,4 +1,5 @@
 package Geo::Coder::OpenCage;
+# ABSTRACT: Geocode coordinates and addresses with the OpenCage Geocoder
 
 use strict;
 use warnings;
@@ -112,10 +113,6 @@ sub reverse_geocode {
 __END__
 
 =encoding utf8
-
-=head1 NAME
-
-Geo::Coder::OpenCage - Geocode coordinates and addresses with the OpenCage Geocoder
 
 =head1 DESCRIPTION
 
