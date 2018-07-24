@@ -43,6 +43,7 @@ my %valid_params = (
     no_record        => 1,
     q                => 1,
     pretty           => 1,  # makes no actual difference
+    proximity        => 1,
 );
 
 sub geocode {
