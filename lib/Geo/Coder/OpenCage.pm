@@ -6,8 +6,9 @@ use warnings;
 
 use Carp;
 use Data::Dumper;
+$Data::Dumper::Sortkeys = 1;
 use HTTP::Tiny;
-use JSON;
+use Cpanel::JSON::XS;
 use URI;
 
 sub new {
@@ -21,7 +22,7 @@ sub new {
     my $self = {
         api_key => $params{api_key},
         ua      => HTTP::Tiny->new(agent => "Geo::Coder::OpenCage"),
-        json    => JSON->new()->utf8(),
+        json    => Cpanel::JSON::XS->new()->utf8(1),
         url     => URI->new('https://api.opencagedata.com/geocode/v1/json/'),
     };
     return bless $self, $class;
@@ -121,6 +122,8 @@ This module provides an interface to the OpenCage geocoding service.
 
 For full details of the API visit L<https://opencagedata.com/api>.
 
+It is recommended you read the L<best pracices for using the OpenCage geocoder|https://opencagedata.com/api#bestpractices> before you start.
+
 =head1 SYNOPSIS
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
@@ -143,7 +146,10 @@ Takes a single named parameter 'location' and returns a result hashref.
 
 warns and returns undef if the query fails for some reason.
 
-The OpenCage Geocoder has a few optional parameters
+If you will be doing forward geocoding, please see the 
+L<OpenCage query formatting guidelines|https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md>
+
+The OpenCage Geocoder has a few optional parameters:
 
 =over 1
 
@@ -223,10 +229,9 @@ Ed Freyfogle
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2017 OpenCage Data Ltd <cpan@opencagedata.com>
+Copyright 2019 OpenCage Data Ltd <cpan@opencagedata.com>
 
-Please check out all our open source work over at L<https://github.com/opencagedata>
-and our developer blog: L<https://blog.opencagedata.com>
+Please check out all our open source work over at L<https://github.com/opencagedata> and our developer blog: L<https://blog.opencagedata.com>
 
 Thanks!
 
