@@ -122,7 +122,7 @@ This module provides an interface to the OpenCage geocoding service.
 
 For full details of the API visit L<https://opencagedata.com/api>.
 
-It is recommended you read the L<best pracices for using the OpenCage geocoder|https://opencagedata.com/api#bestpractices> before you start.
+It is recommended you read the L<best practices for using the OpenCage geocoder|https://opencagedata.com/api#bestpractices> before you start.
 
 =head1 SYNOPSIS
 
