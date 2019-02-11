@@ -1,5 +1,9 @@
 Revision history for Geo-Coder-OpenCage
 
+0.17    2019-02-11
+        - more tests, specifically for correctly dealing with 402, 403 response
+        - use Cpanel::JSON::XS;
+
 0.16    2018-07-24
         - add support for new, optional "proximity" parameter
           see: https://blog.opencagedata.com/post/new-optional-parameter-proximity
