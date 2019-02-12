@@ -14,7 +14,6 @@ use Geo::Coder::OpenCage;
 # use special key OpenCage makes available for testing
 my $api_key = '2e10e5e828262eb243ec0b54681d699a';
 
-
 my $geocoder = Geo::Coder::OpenCage->new(
     api_key => $api_key,
 );
@@ -25,9 +24,8 @@ my $geocoder = Geo::Coder::OpenCage->new(
         { $result = $geocoder->reverse_geocode('lat'=> 41.40139, 'lng'=> 2.12870); }
         [ qr/403, suspended/ ],
         " got suspended warning ";
-
     is($result, undef, 'correctly returned undef for 403 response');
-
 }
 
 done_testing();
+
