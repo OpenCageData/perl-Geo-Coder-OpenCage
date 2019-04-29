@@ -45,6 +45,7 @@ my %valid_params = (
     q                => 1,
     pretty           => 1,  # makes no actual difference
     proximity        => 1,
+    roadinfo         => 1,
 );
 
 sub geocode {
