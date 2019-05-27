@@ -6,6 +6,8 @@ perl:
   - '5.18'
 env: PERL_CPANM_OPT="--notest --force --skip-satisfied"
 before_install:
+  - perlbrew available
+  - perlbrew list
   # submodule should be requested automatically, see
   # https://docs.travis-ci.com/user/common-build-problems/#Git-Submodules-are-not-updated-correctly
   #
