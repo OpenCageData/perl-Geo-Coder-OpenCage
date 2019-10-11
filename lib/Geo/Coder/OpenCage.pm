@@ -11,7 +11,8 @@ use HTTP::Tiny;
 use JSON::MaybeXS;
 use URI;
 # FIXME - must be a way to get this from dist.ini?
-my $version = 0.23;
+my $version = 0.24;
+my $ua_string;
 
 sub new {
     my $class = shift;
@@ -21,14 +22,28 @@ sub new {
         croak "api_key is a required parameter for new()";
     }
 
+    $ua_string = $class . ' ' . $version;
+    my $ua = $params{ua} || HTTP::Tiny->new(agent => $ua_string);
     my $self = {
         version => $version,
         api_key => $params{api_key},
-        ua      => HTTP::Tiny->new(agent => 'Geo::Coder::OpenCage ' . $version),
+        ua      => $ua,
         json    => JSON::MaybeXS->new( utf8 => 1 ),
         url     => URI->new('https://api.opencagedata.com/geocode/v1/json/'),
     };
+
+    print Dumper $ua;
     return bless $self, $class;
+}
+
+sub ua {
+    my $self = shift;
+    my $ua   = shift;
+    if (defined($ua)){
+        $ua->agent($ua_string);
+        $self->{ua} = $ua;
+    }    
+    return $self->{ua};
 }
 
 # see list: https://opencagedata.com/api#forward-opt
@@ -141,6 +156,16 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
 Get your API key from L<https://opencagedata.com>
+
+=head2 ua
+
+    $ua = $geocoder->ua();
+    $ua = $geocoder->ua($ua);
+
+Accessor for the UserAgent object. By default HTTP::Tiny is used. Useful if for
+example you want to specify that something like LWP::UserAgent::Throttled for 
+rate limiting. Even if a new UserAgent is specified the useragent string will 
+be specified as "Geo::Coder::OpenCage $version"
 
 =head2 geocode
 
