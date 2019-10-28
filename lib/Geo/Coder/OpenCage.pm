@@ -236,7 +236,7 @@ This method supports the optional parameters in the same way that geocode() does
 
 =head1 ENCODING
 
-All strings passed to and recieved from Geo::Coder::OpenCage methods are
+All strings passed to and received from Geo::Coder::OpenCage methods are
 expected to be character strings, not byte strings.
 
 For more information see L<perlunicode>.
