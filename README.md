@@ -1,6 +1,6 @@
 # Geo::Coder::OpenCage
 
-This module provides an interface to the [OpenCage geocoded](https://opencagedata.com).
+This module provides a Perl interface to the [OpenCage geocoder](https://opencagedata.com).
 
 ## Build status
 
