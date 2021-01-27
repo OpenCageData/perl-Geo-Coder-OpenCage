@@ -5,6 +5,7 @@ perl:
 - '5.26'
 - '5.28'
 - '5.30'
+- '5.32'
 env: PERL_CPANM_OPT="--notest --force --skip-satisfied"
 before_install:
 - cpanm Dist::Zilla
