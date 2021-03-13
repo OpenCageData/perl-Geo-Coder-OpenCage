@@ -1,6 +1,4 @@
 ---
-dist: focal
-sudo: required
 language: "perl"
 perl:
   - '5.30'
