@@ -3,6 +3,7 @@
 .*.swp
 .tidyall.d
 *.tdy
+/.build/
 *#
 *~
 .#*
