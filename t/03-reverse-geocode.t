@@ -43,7 +43,7 @@ my @tests = (
             lng      => 139.7530053,
             language => "jp",
         },
-        output => "東京都",
+        output => "皇居",
     },
 );
 
