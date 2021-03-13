@@ -1,25 +1,21 @@
----
-language: "perl"
+language: perl
 perl:
-  - '5.30'
+- '5.30'
 env: PERL_CPANM_OPT="--notest --force --skip-satisfied"
 before_install:
-  # get the perl modules we need
-  #
-  # install dist development dependencies
-  - "cpanm Dist::Zilla"
-  - "dzil authordeps | grep '::' | xargs cpanm"
-  - "export tmpbuild=`mktemp --directory`"
-  - "dzil build --in $tmpbuild"
-  # for reporting to coveralls.io
-  - "cpanm --quiet --notest Devel::Cover::Report::Coveralls"  
-install: "dzil listdeps | xargs cpanm"
+- cpanm Dist::Zilla
+- dzil authordeps | xargs cpanm
+- export tmpbuild=`mktemp --directory`
+- dzil build --in $tmpbuild
+- cpanm --quiet --notest Devel::Cover::Report::Coveralls
+install: dzil listdeps | xargs cpanm
 script:
-  - "dzil test --author"
-  - PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove -lrsv t
-  - cover
+- dzil test --author
+- PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove
+  -lrsv t
+- cover
 after_success:
-  - cover -report coveralls
+- cover -report coveralls
 notifications:
   email:
     on_failure: always
