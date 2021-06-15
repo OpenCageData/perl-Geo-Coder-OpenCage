@@ -27,7 +27,7 @@ sub new {
         api_key => $params{api_key},
         ua      => $ua,
         json    => JSON::MaybeXS->new(utf8 => 1),
-        url     => URI->new('https://api.opencagedata.com/geocode/v1/json/'),
+        url     => URI->new('https://api.opencagedata.com/geocode/v1/json'),
     };
 
     return bless $self, $class;
@@ -85,11 +85,16 @@ sub geocode {
         }
     }
 
-    my $URL = $self->{url}->clone();
-    $URL->query_form(
-        key => $self->{api_key},
-        %params,
-    );
+    $params{key} = $self->{api_key};
+    
+    # sort the params for better cachability
+    my @final_params;
+    foreach my $k (sort keys %params){
+        push(@final_params, $k => $params{$k})
+        
+    }
+    my $URL = $self->{url}->clone();    
+    $URL->query_form(\@final_params);
 
     my $response = $self->{ua}->get($URL);
 
