@@ -99,13 +99,25 @@ sub geocode {
     my $response = $self->{ua}->get($URL);
 
     if (!$response) {
-        warn "failed to fetch '$URL': ", $response->{reason};
+        my $reason = (ref($response) eq 'HTTP::Response')
+                    ? $response->status_line() # <code> <message>
+                    : $response->{reason};
+        warn "failed to fetch '$URL': ", $reason;
         return undef;
     }
 
-    my $rh_content = $self->{json}->decode($response->{content});
+    # Support HTTP::Tiny and LWP:: CPAN packages
+    my $content = (ref($response) eq 'HTTP::Response')
+                    ? $response->decoded_content()
+                    : $response->{content};
+    my $is_success = (ref($response) eq 'HTTP::Response')
+                       ? $response->is_success()
+                       : $response->{success};
 
-    if (!$response->{success}) {
+    my $rh_content = $self->{json}->decode($content);
+
+
+    if (!$is_success) {
         warn "response when requesting '$URL': " . $rh_content->{status}{code} . ', ' . $rh_content->{status}{message};
         return undef;
     }
