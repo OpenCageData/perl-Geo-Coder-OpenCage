@@ -9,7 +9,7 @@ use HTTP::Tiny;
 use JSON::MaybeXS;
 use URI;
 # FIXME - must be a way to get this from dist.ini?
-my $version = 0.32;
+my $version = 0.33;
 my $ua_string;
 
 sub new {

@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.33    2021-06-23
+        - need LWP::Protocol::https for tests
+
 0.32    2021-06-21
         - Support LWP user agents again PR #13
 
