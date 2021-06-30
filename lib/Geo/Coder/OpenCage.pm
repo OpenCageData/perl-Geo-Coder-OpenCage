@@ -186,7 +186,7 @@ Takes a single named parameter 'location' and returns a result hashref.
 warns and returns undef if the query fails for some reason.
 
 If you will be doing forward geocoding, please see the 
-L<OpenCage query formatting guidelines|https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md>
+L<OpenCage query formatting guidelines|https://opencagedata.com/guides/how-to-format-your-geocoding-query>
 
 The OpenCage Geocoder has a few optional parameters:
 
