@@ -1,5 +1,6 @@
 language: perl
 perl:
+- '5.32'
 - '5.30'
 env: PERL_CPANM_OPT="--notest --force --skip-satisfied"
 before_install:
