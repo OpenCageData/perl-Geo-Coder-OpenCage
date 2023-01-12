@@ -265,6 +265,4 @@ For more information see L<perlunicode>.
 
 This module was L<featured in the 2016 Perl Advent Calendar|http://perladvent.org/2016/2016-12-08.html>.
 
-Ed Freyfogle from the OpenCage team gave L<an interview with Built in Perl about how Perl is used at OpenCage|http://blog.builtinperl.com/post/opencage-data-geocoding-in-perl>.
-
 =cut
