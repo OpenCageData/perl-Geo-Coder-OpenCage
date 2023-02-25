@@ -10,7 +10,7 @@ use JSON::MaybeXS;
 use Scalar::Util 'blessed';
 use URI;
 
-my $version = our $VERSION;
+my $version = our $VERSION || 'dev';
 my $ua_string;
 
 sub new {
