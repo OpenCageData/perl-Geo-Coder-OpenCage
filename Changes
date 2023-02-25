@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.36    YYYY-MM-DD
+        -
+
 0.35    2023-02-25
         big thanks to TOBYINK for various suggestions/improvements
         - get version number via $VERSION
