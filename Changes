@@ -1,6 +1,6 @@
 Revision history for Geo-Coder-OpenCage
 
-0.34    2023-02-25
+0.35    2023-02-25
         big thanks to TOBYINK for various suggestions/improvements
         - get version number via $VERSION
         - allow user-agents that are a subclass of HTTP::Response
