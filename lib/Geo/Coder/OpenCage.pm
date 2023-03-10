@@ -156,7 +156,7 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
-    my $result = $Geocoder->geocode(location => "Donostia");
+    my $response = $Geocoder->geocode(location => "Donostia");
 
 =head1 METHODS
 
@@ -181,12 +181,21 @@ be specified as "Geo::Coder::OpenCage $version"
 
 Takes a single named parameter 'location' and returns a result hashref.
 
-    my $result = $Geocoder->geocode(location => "Mudgee, Australia");
+    my $response = $Geocoder->geocode(location => "Mudgee, Australia");
 
 warns and returns undef if the query fails for some reason.
 
 If you will be doing forward geocoding, please see the 
 L<OpenCage query formatting guidelines|https://opencagedata.com/guides/how-to-format-your-geocoding-query>
+
+You should check the always response status 
+
+  $response->{status}{code} 
+
+to ensure you have had a successful response, are not hitting rate limits, etc.
+Please see the 
+L<OpenCage geocoding API response codes|https://opencagedata.com/api#codes>
+
 
 The OpenCage Geocoder has a few optional parameters:
 
@@ -233,7 +242,7 @@ option is never used.
 
 As a full example:
 
-    my $result = $Geocoder->geocode(
+    my $response = $Geocoder->geocode(
         location => "Псковская улица, Санкт-Петербург, Россия",
         language => "ru",
         countrycode => "ru",
@@ -243,7 +252,7 @@ As a full example:
 
 Takes two named parameters 'lat' and 'lng' and returns a result hashref.
 
-    my $result = $Geocoder->reverse_geocode(lat => -22.6792, lng => 14.5272);
+    my $response = $Geocoder->reverse_geocode(lat => -22.6792, lng => 14.5272);
 
 This method supports the optional parameters in the same way that geocode() does.
 
