@@ -1,5 +1,5 @@
 package Geo::Coder::OpenCage;
-# ABSTRACT: Geocode coordinates and addresses with the OpenCage Geocoder
+# ABSTRACT: Geocode coordinates and addresses with the OpenCage Geocoding API
 
 use strict;
 use warnings;
@@ -148,7 +148,7 @@ __END__
 
 This module provides an interface to the OpenCage geocoding service.
 
-For full details of the API visit L<https://opencagedata.com/api>.
+For full details of the API visit L<https://opencagedata.com/api>
 
 It is recommended you read the L<best practices for using the OpenCage geocoder|https://opencagedata.com/api#bestpractices> before you start.
 
@@ -165,6 +165,7 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
 Get your API key from L<https://opencagedata.com>.
+
 Optionally "http => 1" can also be specified in which case API requests will NOT be made via https
 
 =head2 ua
@@ -264,6 +265,10 @@ expected to be character strings, not byte strings.
 For more information see L<perlunicode>.
 
 =head1 SEE ALSO
+
+Please see L<the Perl tutorial|https://opencagedata.com/tutorials/geocode-in-perl> on the OpenCage site. Many other languages and frameworks are also available.
+
+For full details of the API visit L<https://opencagedata.com/api>
 
 This module was L<featured in the 2016 Perl Advent Calendar|http://perladvent.org/2016/2016-12-08.html>.
 
