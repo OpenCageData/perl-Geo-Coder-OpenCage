@@ -12,7 +12,7 @@ jobs:
 
     env:
       PERL_CPANM_OPT: "--notest --force --skip-satisfied"
-
+      GEO_CODER_OPENCAGE_API_KEY: ${{ secrets.GEO_CODER_OPENCAGE_API_KEY }}
     name: Perl ${{ matrix.version }}
 
     steps:
@@ -31,7 +31,9 @@ jobs:
           dzil build --in $tmpbuild
           cpanm --quiet --notest Devel::Cover::Report::Coveralls
           dzil listdeps | xargs cpanm
-          dzil test --author
+
+      - name: Dzil tests
+        run: dzil test --author
 
       - name: Tests
         run: |
