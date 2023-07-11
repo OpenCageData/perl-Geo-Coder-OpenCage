@@ -39,5 +39,5 @@ jobs:
         run: |
           PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove -lrsv t
 
-      - name: Coverall report
-        run: cover -report coveralls
+      # - name: Coverall report
+      #   run: cover -report coveralls
