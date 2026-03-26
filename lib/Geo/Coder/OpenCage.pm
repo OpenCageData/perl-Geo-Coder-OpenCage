@@ -144,19 +144,6 @@ __END__
 
 =encoding utf8
 
-
-=head1 NAME
-
-Geo::Coder::OpenCage - Perl interface to the OpenCage geocoding API
-
-=head1 DESCRIPTION
-
-This module provides an interface to the OpenCage geocoding service.
-
-For full details of the API visit L<https://opencagedata.com/api>
-
-It is recommended you read the L<best practices for using the OpenCage geocoder|https://opencagedata.com/api#bestpractices> before you start.
-
 =head1 SYNOPSIS
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
@@ -165,7 +152,7 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
     my $response = $Geocoder->geocode(location => "Berlin");
 
     # reverse geocoding
-    my $response = $geocoder->reverse_geocode(lat => 52.5432379, lng => 13.4142133 );
+    my $response = $Geocoder->reverse_geocode(lat => 52.5432379, lng => 13.4142133 );
 
     if ($response->{status}{code} == 200) {
         foreach my $r (@{ $response->{results} }) {
@@ -175,12 +162,19 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
         }
     }
 
+=head1 DESCRIPTION
+
+This module provides an interface to the OpenCage geocoding service.
+
+For full details of the API visit L<https://opencagedata.com/api>
+
+It is recommended you read the L<best practices for using the OpenCage geocoder|https://opencagedata.com/api#bestpractices> before you start.
 
 =head1 DEVELOPING WITH AI
 
 Please note there is an
 L<AI SKILL.md for working with the OpenCage Geocoding API|https://github.com/OpenCageData/opencage-skills/blob/master/opencage-geocoding-api/SKILL.md>
-which includes a reference file for developing in Perl using this module. 
+which includes a reference file for developing in Perl using this module.
 
 =head1 METHODS
 
@@ -190,7 +184,7 @@ which includes a reference file for developing in Perl using this module.
 
 Get your API key from L<https://opencagedata.com>.
 
-Optionally "http => 1" can also be specified in which case API requests will NOT be made via https. 
+Optionally "http => 1" can also be specified in which case API requests will NOT be made via https.
 
 =head2 ua
 
@@ -214,7 +208,7 @@ warns and returns undef if the query fails for some reason.
 If you will be doing forward geocoding, please see the 
 L<OpenCage query formatting guidelines|https://opencagedata.com/guides/how-to-format-your-geocoding-query>
 
-You should check the always response status 
+You should always check the response status 
 
   $response->{status}{code} 
 
@@ -228,16 +222,17 @@ L<OpenCage geocoding API response codes|https://opencagedata.com/api#codes>
       die "Geocoding failed";
   }
   if ($response->{status}{code} != 200) {
-      warn "API error: " . $result->{status}{message};
+      warn "API error: " . $response->{status}{message};
   }
 
+
+=over 
 
 =item Supported Parameters
 
 The OpenCage Geocoder has a few optional parameters.
 
 Please see L<the OpenCage geocoder documentation|https://opencagedata.com/api>. Most of L<the various optional parameters|https://opencagedata.com/api#forward-opt> are supported.
-
 
 The most commonly useful parameters are:
 
@@ -276,6 +271,7 @@ option is never used.
 
 All other API parameters are passed through directly
 
+=back
 
 =head2 reverse_geocode
 
