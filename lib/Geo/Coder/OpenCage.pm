@@ -144,6 +144,11 @@ __END__
 
 =encoding utf8
 
+
+=head1 NAME
+
+Geo::Coder::OpenCage - Perl interface to the OpenCage geocoding API
+
 =head1 DESCRIPTION
 
 This module provides an interface to the OpenCage geocoding service.
@@ -156,7 +161,26 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
 
     my $Geocoder = Geo::Coder::OpenCage->new(api_key => $my_api_key);
 
-    my $response = $Geocoder->geocode(location => "Donostia");
+    # forward geocoding
+    my $response = $Geocoder->geocode(location => "Berlin");
+
+    # reverse geocoding
+    my $response = $geocoder->reverse_geocode(lat => 52.5432379, lng => 13.4142133 );
+
+    if ($response->{status}{code} == 200) {
+        foreach my $r (@{ $response->{results} }) {
+            print $r->{formatted}, "\n";
+            print 'lat: ' . $r->{geometry}{lat}, "\n";
+            print 'lng: ' . $r->{geometry}{lng}, "\n";
+        }
+    }
+
+
+=head1 DEVELOPING WITH AI
+
+Please note there is an
+L<AI SKILL.md for working with the OpenCage Geocoding API|https://github.com/OpenCageData/opencage-skills/blob/master/opencage-geocoding-api/SKILL.md>
+which includes a reference file for developing in Perl using this module. 
 
 =head1 METHODS
 
@@ -166,7 +190,7 @@ It is recommended you read the L<best practices for using the OpenCage geocoder|
 
 Get your API key from L<https://opencagedata.com>.
 
-Optionally "http => 1" can also be specified in which case API requests will NOT be made via https
+Optionally "http => 1" can also be specified in which case API requests will NOT be made via https. 
 
 =head2 ua
 
@@ -175,8 +199,9 @@ Optionally "http => 1" can also be specified in which case API requests will NOT
 
 Accessor for the UserAgent object. By default HTTP::Tiny is used. Useful if for
 example you want to specify that something like LWP::UserAgent::Throttled for 
-rate limiting. Even if a new UserAgent is specified the useragent string will 
-be specified as "Geo::Coder::OpenCage $version"
+rate limiting.
+
+Regardless of which UserAgent object is used, the User-Agent HTTP header will always be set to Geo::Coder::OpenCage/$version.
 
 =head2 geocode
 
@@ -198,16 +223,23 @@ Please see the
 L<OpenCage geocoding API response codes|https://opencagedata.com/api#codes>
 
 
-The OpenCage Geocoder has a few optional parameters:
+  my $response = $geocoder->geocode(location => "Berlin");
+  unless (defined $response) {
+      die "Geocoding failed";
+  }
+  if ($response->{status}{code} != 200) {
+      warn "API error: " . $result->{status}{message};
+  }
 
-=over 1
 
 =item Supported Parameters
 
-please see L<the OpenCage geocoder documentation|https://opencagedata.com/api>. Most of
-L<the various optional parameters|https://opencagedata.com/api#forward-opt> are supported. For example:
+The OpenCage Geocoder has a few optional parameters.
 
-=over 2
+Please see L<the OpenCage geocoder documentation|https://opencagedata.com/api>. Most of L<the various optional parameters|https://opencagedata.com/api#forward-opt> are supported.
+
+
+The most commonly useful parameters are:
 
 =item language
 
@@ -224,22 +256,7 @@ Provides the geocoder with a hint to the country that the query resides in.
 This value will help the geocoder but will not restrict the possible results to
 the supplied country.
 
-The country code is a comma seperated list of 2 character code as defined by the ISO 3166-1 Alpha 2 standard.
-
-=back
-
-=item Not Supported
-
-=over 2
-
-=item jsonp
-
-This module always parses the response as a Perl data structure, so the jsonp
-option is never used.
-
-=back
-
-=back
+The countrycode is a comma separated list of 2 character code as defined by the ISO 3166-1 Alpha 2 standard.
 
 As a full example:
 
@@ -248,6 +265,17 @@ As a full example:
         language => "ru",
         countrycode => "ru",
     );
+
+
+=item Not Supported
+
+=item jsonp
+
+This module always parses the response as a Perl data structure, so the jsonp
+option is never used.
+
+All other API parameters are passed through directly
+
 
 =head2 reverse_geocode
 
