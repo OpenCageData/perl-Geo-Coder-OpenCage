@@ -1,3 +1,7 @@
+# Dist::Zilla build artifacts (`dzil build`, `dzil release`)
+Geo-Coder-OpenCage-*.tar.gz
+/Geo-Coder-OpenCage-*/
+
 .DS_Store
 ._.DS_Store
 .*.swp
