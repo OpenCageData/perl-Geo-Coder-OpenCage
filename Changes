@@ -2,6 +2,9 @@ Revision history for Geo-Coder-OpenCage
 
 unreleased
         code fixes:
+        - valid_params list wasn't actually used
+        - valid_params warned if a parameter value was 0 (e.g. 'no_dedupe' can be set to 0)
+        - 'key' can only be set in new(), not overwritten in geocoding calls
         - We documented user-agent string as "Geo::Coder::OpenCage/$VERSION" but in code it
            used space as delimiter. It's also set when another UA is supplied in new() as
            documented.
@@ -9,6 +12,7 @@ unreleased
         - no longer test against Perl < 5.38
         - connectivity check uses TCP/443 (requires no root)
         - we pinged a stale hardcoded IP so some tests where always skipped
+        - new tests for parameter validation (typo, key, format, jsonp)
         release tooling:
         - abort (die) instead of warn on untracked files
         - .gitignore: drop dead entries, ignore dotted dirs except .github
