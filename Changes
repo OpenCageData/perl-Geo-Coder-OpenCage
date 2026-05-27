@@ -6,6 +6,8 @@ unreleased
         - valid_params warned if a parameter value was 0 (e.g. 'no_dedupe' can be set to 0)
         - 'key' can only be set in new(), not overwritten in geocoding calls
         - fix defined() parenthesization in http=>1 handling
+        - JSON decode now warns and returns undef on parse error instead of dying
+        - avoid printing API key in error messages
         documentation:
         - document http=>1 and ua=>$ua parameters of new()
         - We documented user-agent string as "Geo::Coder::OpenCage/$VERSION" but in code it
@@ -16,6 +18,7 @@ unreleased
         - connectivity check uses TCP/443 (requires no root)
         - we pinged a stale hardcoded IP so some tests where always skipped
         - new tests for parameter validation (typo, key, format, jsonp)
+        - new tests for JSON decoding and API-key masking
         release tooling:
         - abort (die) instead of warn on untracked files
         - .gitignore: drop dead entries, ignore dotted dirs except .github

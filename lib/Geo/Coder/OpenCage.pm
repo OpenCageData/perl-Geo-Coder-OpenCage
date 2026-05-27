@@ -114,13 +114,30 @@ sub geocode {
         ? $response->is_success()
         : $response->{success};
 
-    my $rh_content = $self->{json}->decode($content);
+    my $rh_content;
+    my $ok = eval { $rh_content = $self->{json}->decode($content); 1 };
+    if (!$ok) {
+        my $err = $@ || 'unknown error';
+        warn "failed to decode response from '" . $self->_sanitized_url($URL) . "': $err";
+        return undef;
+    }
 
     if (!$is_success) {
-        warn "response when requesting '$URL': " . $rh_content->{status}{code} . ', ' . $rh_content->{status}{message};
+        my $status = $rh_content->{status} || {};
+        my $code   = $status->{code}    // '?';
+        my $msg    = $status->{message} // 'unknown error';
+        warn "response when requesting '" . $self->_sanitized_url($URL) . "': $code, $msg";
         return undef;
     }
     return $rh_content;
+}
+
+# mask the API key in a URL before logging, so it doesn't leak into stderr
+sub _sanitized_url {
+    my ($self, $url) = @_;
+    my $masked = substr($self->{api_key}, 0, 6) . '...';
+    (my $str = "$url") =~ s/\Q$self->{api_key}\E/$masked/g;
+    return $str;
 }
 
 sub reverse_geocode {
