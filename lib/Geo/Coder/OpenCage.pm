@@ -25,7 +25,7 @@ sub new {
     $ua->agent($ua_string);
     my $api_url = 'https://api.opencagedata.com/geocode/v1/json';
     
-    if (defined($params{http}) && $params{http} == 1){
+    if (defined($params{http}) && $params{http} eq '1') {
         $api_url =~ s|^https://|http://|;
     }
     my $self = {
