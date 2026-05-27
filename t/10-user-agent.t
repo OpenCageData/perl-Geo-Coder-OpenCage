@@ -5,7 +5,6 @@ use Net::Ping;
 use Test::More;
 use Test::Warn;
 use LWP::UserAgent;
-$ENV{PERL_LWP_SSL_VERIFY_HOSTNAME} = 0;
 
 binmode Test::More->builder->output,         ":encoding(utf8)";
 binmode Test::More->builder->failure_output, ":encoding(utf8)";
