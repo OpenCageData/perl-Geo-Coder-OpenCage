@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 use utf8;
-use Net::Ping;
 use Test::More;
 use Test::Warn;
 use LWP::UserAgent;
@@ -10,8 +9,10 @@ binmode Test::More->builder->output,         ":encoding(utf8)";
 binmode Test::More->builder->failure_output, ":encoding(utf8)";
 binmode Test::More->builder->todo_output,    ":encoding(utf8)";
 
-use lib './lib'; # actually use the module, not other versions installed
+use lib './lib';   # actually use the module, not other versions installed
+use lib './t/lib'; # shared test helpers
 use Geo::Coder::OpenCage;
+use TestConnectivity;
 
 # Verify the UA string format documented in the pod: "Geo::Coder::OpenCage/$VERSION"
 {
@@ -39,15 +40,9 @@ use Geo::Coder::OpenCage;
     );
 }
 
-# TODO should move this into module to share with other tests
-# Use TCP/443 so the connectivity check works for non-root users (ICMP needs privileges)
-my $api_host        = 'api.opencagedata.com';
-my $p               = Net::Ping->new('tcp', 1);
-$p->port_number(443);
-my $have_connection = $p->ping($api_host) ? 1 : 0;
-
 SKIP: {
-    skip 'skipping test that requires connectivity', 2 unless ($have_connection);
+    skip 'skipping test that requires connectivity', 2
+        unless TestConnectivity::have_connection();
 
     my $user_agent = LWP::UserAgent->new();
 

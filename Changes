@@ -30,6 +30,7 @@ unreleased
         - new tests for reverse geocoding calling without required parameters (lat,lng)
         - test the Perl documentation (POD) syntax
         - we use hardcoded test API keys. Added links to the documentation
+        - factored duplicated Net::Ping connectivity check into t/lib/TestConnectivity.pm
         release tooling:
         - abort (die) instead of warn on untracked files
         - .gitignore: drop dead entries, ignore dotted dirs except .github
