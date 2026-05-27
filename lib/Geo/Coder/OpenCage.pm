@@ -14,8 +14,7 @@ my $version = our $VERSION || 'dev';
 my $ua_string = "Geo::Coder::OpenCage/$version";
 
 sub new {
-    my $class  = shift;
-    my %params = @_;
+    my ($class, %params) = @_;
 
     if (!$params{api_key}) {
         croak "api_key is a required parameter for new()";
@@ -72,14 +71,13 @@ my %valid_params = (
 );
 
 sub geocode {
-    my $self   = shift;
-    my %params = @_;
+    my ($self, %params) = @_;
 
     if (defined($params{location})) {
         $params{q} = delete $params{location};
     } else {
         warn "location is a required parameter for geocode()";
-        return undef;
+        return;
     }
 
     foreach my $k (keys %params) {
@@ -114,7 +112,7 @@ sub geocode {
     if (!$ok) {
         my $err = $@ || 'unknown error';
         warn "failed to decode response from '" . $self->_sanitized_url($URL) . "': $err";
-        return undef;
+        return;
     }
 
     if (!$is_success) {
@@ -122,7 +120,7 @@ sub geocode {
         my $code   = $status->{code}    // '?';
         my $msg    = $status->{message} // 'unknown error';
         warn "response when requesting '" . $self->_sanitized_url($URL) . "': $code, $msg";
-        return undef;
+        return;
     }
     return $rh_content;
 }
@@ -136,13 +134,12 @@ sub _sanitized_url {
 }
 
 sub reverse_geocode {
-    my $self   = shift;
-    my %params = @_;
+    my ($self, %params) = @_;
 
     foreach my $k (qw(lat lng)) {
         if (!defined($params{$k})) {
             warn "$k is a required parameter";
-            return undef;
+            return;
         }
     }
 
