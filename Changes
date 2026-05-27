@@ -1,5 +1,9 @@
 Revision history for Geo-Coder-OpenCage
 
+unreleased
+        tests:
+        - no longer test against Perl < 5.38
+
 0.40    2026-04-01
         - documenation: use "Agent Skill" terminology and link to the opencage-skills
           repo root instead of a deep file path
