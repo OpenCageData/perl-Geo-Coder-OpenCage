@@ -11,7 +11,7 @@ use Scalar::Util 'blessed';
 use URI;
 
 my $version = our $VERSION || 'dev';
-my $ua_string;
+my $ua_string = "Geo::Coder::OpenCage/$version";
 
 sub new {
     my $class  = shift;
@@ -21,8 +21,8 @@ sub new {
         croak "api_key is a required parameter for new()";
     }
 
-    $ua_string = $class . ' ' . $version;
-    my $ua   = $params{ua} || HTTP::Tiny->new(agent => $ua_string);
+    my $ua = $params{ua} || HTTP::Tiny->new;
+    $ua->agent($ua_string);
     my $api_url = 'https://api.opencagedata.com/geocode/v1/json';
     
     if (defined($params{http} && $params{http} == 1 )){
@@ -195,7 +195,7 @@ Accessor for the UserAgent object. By default HTTP::Tiny is used. Useful if for
 example you want to specify that something like LWP::UserAgent::Throttled for 
 rate limiting.
 
-Regardless of which UserAgent object is used, the User-Agent HTTP header will always be set to Geo::Coder::OpenCage/$version.
+Regardless of which UserAgent object is used, the User-Agent HTTP header will always be set to C<Geo::Coder::OpenCage/I<VERSION>>, where I<VERSION> is the installed module version.
 
 =head2 geocode
 

@@ -5,10 +5,17 @@ unreleased
         - bump HTTP::Tiny to 0.83 (shipped with Perl 5.38), pin previously unpinned versions
         - move Scalar::Util to RuntimeRequires (was misclassified as test-only)
         - drop Pod::Perldoc from RuntimeRequires (not actually used)
+        code fixes:
+        - We documented user-agent string as "Geo::Coder::OpenCage/$VERSION" but in code it
+           used space as delimiter. It's also set when another UA is supplied in new() as
+           documented.
         tests:
         - no longer test against Perl < 5.38
         - connectivity check uses TCP/443 (requires no root)
         - we pinged a stale hardcoded IP so some tests where always skipped
+        release tooling:
+        - abort (die) instead of warn on untracked files
+        - .gitignore: drop dead entries, ignore dotted dirs except .github
 
 0.40    2026-04-01
         - documenation: use "Agent Skill" terminology and link to the opencage-skills
