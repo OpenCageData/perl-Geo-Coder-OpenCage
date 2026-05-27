@@ -117,8 +117,9 @@ sub geocode {
 
     if (!$is_success) {
         my $status = $rh_content->{status} || {};
-        my $code   = $status->{code}    // '?';
-        my $msg    = $status->{message} // 'unknown error';
+        # Cleanup server-supplied strings, e.g. new-lines
+        my $code = ($status->{code}    // '?')             =~ s/[[:cntrl:]]//gr;
+        my $msg  = ($status->{message} // 'unknown error') =~ s/[[:cntrl:]]//gr;
         carp "response when requesting '" . $self->_sanitized_url($URL) . "': $code, $msg";
         return;
     }
