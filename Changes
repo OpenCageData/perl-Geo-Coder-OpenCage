@@ -21,6 +21,7 @@ unreleased
         - new tests for parameter validation (typo, key, format, jsonp)
         - new tests for JSON decoding and API-key masking
         - new test for HTTP::Response subclasses
+        - new tests for reverse geocoding calling without required parameters (lat,lng)
         release tooling:
         - abort (die) instead of warn on untracked files
         - .gitignore: drop dead entries, ignore dotted dirs except .github
