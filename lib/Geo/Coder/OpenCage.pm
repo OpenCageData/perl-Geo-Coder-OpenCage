@@ -58,6 +58,7 @@ my %valid_params = (
     countrycode    => 1,
     format         => 0,
     jsonp          => 0,
+    key            => 0,
     language       => 1,
     limit          => 1,
     min_confidence => 1,
@@ -81,12 +82,11 @@ sub geocode {
         return undef;
     }
 
-    for my $k (keys %params) {
-        if (!defined($params{$k})) {
+    foreach my $k (keys %params) {
+        if (!exists($valid_params{$k})) {
             warn "Unknown geocode parameter: $k";
             delete $params{$k};
-        }
-        if (!$params{$k}) { # is a real parameter but we dont support it
+        } elsif ($valid_params{$k} == 0) { # is a real parameter but we dont support it
             warn "Unsupported geocode parameter: $k";
             delete $params{$k};
         }
