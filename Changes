@@ -6,6 +6,7 @@ unreleased
         - move Scalar::Util to RuntimeRequires (was misclassified as test-only)
         - drop Pod::Perldoc from RuntimeRequires (not actually used)
         code fixes:
+        - default HTTP::Tiny UA now uses a 10 second timeout
         - valid_params list wasn't actually used
         - valid_params warned if a parameter value was 0 (e.g. 'no_dedupe' can be set to 0)
         - 'key' can only be set in new(), not overwritten in geocoding calls

@@ -21,7 +21,7 @@ sub new {
         croak "api_key is a required parameter for new()";
     }
 
-    my $ua = $params{ua} || HTTP::Tiny->new;
+    my $ua = $params{ua} || HTTP::Tiny->new(timeout => 10);
     $ua->agent($ua_string);
     my $api_url = 'https://api.opencagedata.com/geocode/v1/json';
     
@@ -211,9 +211,10 @@ specific reason to disable TLS (e.g. debugging via a local proxy).
 
 =item C<< ua => $user_agent >>
 
-Supply your own UserAgent object instead of the default L<HTTP::Tiny>. Useful
-for things like rate limiting (L<LWP::UserAgent::Throttled>) or testing with
-a mock UA. See L</ua> for details on the User-Agent header.
+Supply your own UserAgent object instead of the default L<HTTP::Tiny> (which
+is constructed with a 10 second timeout). Useful for things like rate limiting
+(L<LWP::UserAgent::Throttled>) or testing with a mock UA. See L</ua> for
+details on the User-Agent header.
 
 =back
 
