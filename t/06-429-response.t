@@ -13,12 +13,11 @@ use lib './lib'; # actually use the module, not other versions installed
 use Geo::Coder::OpenCage;
 
 # TODO should move this into module to share with other tests
-my $api_ip_num      = '95.216.176.62';
-my $p               = Net::Ping->new;
-my $have_connection = 0;
-if ($p->ping($api_ip_num, 1)) {
-    $have_connection = 1;
-}
+# Use TCP/443 so the connectivity check works for non-root users (ICMP needs privileges)
+my $api_host        = 'api.opencagedata.com';
+my $p               = Net::Ping->new('tcp', 1);
+$p->port_number(443);
+my $have_connection = $p->ping($api_host) ? 1 : 0;
 
 SKIP: {
     skip 'skipping test that requires connectivity', 2 unless ($have_connection);
