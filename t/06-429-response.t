@@ -23,6 +23,7 @@ SKIP: {
     skip 'skipping test that requires connectivity', 2 unless ($have_connection);
 
     # use special key OpenCage makes available for testing
+    # https://opencagedata.com/api#testingkeys
     my $api_key = 'd6d0f0065f4348a4bdfe4587ba02714b';
 
     my $geocoder = Geo::Coder::OpenCage->new(api_key => $api_key,);

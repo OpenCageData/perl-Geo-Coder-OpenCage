@@ -23,6 +23,7 @@ SKIP: {
     skip 'skipping test that requires connectivity', 2 unless ($have_connection);
 
     # use special key OpenCage makes available for testing
+    # https://opencagedata.com/api#testingkeys
     my $api_key = '4372eff77b8343cebfc843eb4da4ddc4';
 
 
