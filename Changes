@@ -11,6 +11,7 @@ unreleased
         - accept HTTP::Response subclasses (content/is_success branches stayed in sync)
         documentation:
         - document http=>1 and ua=>$ua parameters of new()
+        - restructure geocode() Supported/Not Supported sections into proper =head3/=over blocks
         - We documented user-agent string as "Geo::Coder::OpenCage/$VERSION" but in code it
            used space as delimiter. It's also set when another UA is supplied in new() as
            documented.
@@ -22,6 +23,7 @@ unreleased
         - new tests for JSON decoding and API-key masking
         - new test for HTTP::Response subclasses
         - new tests for reverse geocoding calling without required parameters (lat,lng)
+        - test the Perl documentation (POD) syntax
         release tooling:
         - abort (die) instead of warn on untracked files
         - .gitignore: drop dead entries, ignore dotted dirs except .github

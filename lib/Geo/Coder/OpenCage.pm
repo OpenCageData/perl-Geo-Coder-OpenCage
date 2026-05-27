@@ -258,15 +258,15 @@ L<OpenCage geocoding API response codes|https://opencagedata.com/api#codes>
   }
 
 
-=over 
-
-=item Supported Parameters
+=head3 Supported Parameters
 
 The OpenCage Geocoder has a few optional parameters.
 
 Please see L<the OpenCage geocoder documentation|https://opencagedata.com/api>. Most of L<the various optional parameters|https://opencagedata.com/api#forward-opt> are supported.
 
 The most commonly useful parameters are:
+
+=over
 
 =item language
 
@@ -285,6 +285,8 @@ the supplied country.
 
 The countrycode is a comma separated list of 2 character code as defined by the ISO 3166-1 Alpha 2 standard.
 
+=back
+
 As a full example:
 
     my $response = $Geocoder->geocode(
@@ -293,17 +295,18 @@ As a full example:
         countrycode => "ru",
     );
 
+=head3 Not Supported
 
-=item Not Supported
+=over
 
 =item jsonp
 
 This module always parses the response as a Perl data structure, so the jsonp
 option is never used.
 
-All other API parameters are passed through directly
-
 =back
+
+All other API parameters are passed through directly.
 
 =head2 reverse_geocode
 
