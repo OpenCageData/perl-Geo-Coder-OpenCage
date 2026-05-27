@@ -1,6 +1,6 @@
 Revision history for Geo-Coder-OpenCage
 
-unreleased
+0.41    2026-05-27
         dependencies:
         - bump HTTP::Tiny to 0.83 (shipped with Perl 5.38), pin previously unpinned versions
         - move Scalar::Util to RuntimeRequires (was misclassified as test-only)
