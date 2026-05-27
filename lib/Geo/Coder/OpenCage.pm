@@ -102,7 +102,6 @@ sub geocode {
     }
     my $URL = $self->{url}->clone();    
     $URL->query_form(\@final_params);
-    # print STDERR 'url: ' . $URL->as_string . "\n";
     my $response = $self->{ua}->get($URL);
 
     # Support HTTP::Tiny and LWP:: CPAN packages (and subclasses of either).
