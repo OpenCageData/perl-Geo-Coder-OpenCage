@@ -25,8 +25,8 @@ sub new {
     $ua->agent($ua_string);
     my $api_url = 'https://api.opencagedata.com/geocode/v1/json';
     
-    if (defined($params{http} && $params{http} == 1 )){
-        $api_url =~ s|^https|http|;
+    if (defined($params{http}) && $params{http} == 1){
+        $api_url =~ s|^https://|http://|;
     }
     my $self = {
         version => $version,
@@ -184,7 +184,26 @@ which includes a reference file for developing in Perl using this module.
 
 Get your API key from L<https://opencagedata.com>.
 
-Optionally "http => 1" can also be specified in which case API requests will NOT be made via https.
+=head3 Optional parameters
+
+=over
+
+=item C<< http => 1 >>
+
+Make API requests over plain HTTP instead of HTTPS.
+
+B<Warning:> this is strongly discouraged. Your API key and all queries (which
+may include user-supplied addresses or coordinates) will be transmitted in
+cleartext and visible to any network observer. Only use this if you have a
+specific reason to disable TLS (e.g. debugging via a local proxy).
+
+=item C<< ua => $user_agent >>
+
+Supply your own UserAgent object instead of the default L<HTTP::Tiny>. Useful
+for things like rate limiting (L<LWP::UserAgent::Throttled>) or testing with
+a mock UA. See L</ua> for details on the User-Agent header.
+
+=back
 
 =head2 ua
 

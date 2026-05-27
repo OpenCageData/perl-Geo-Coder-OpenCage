@@ -5,6 +5,9 @@ unreleased
         - valid_params list wasn't actually used
         - valid_params warned if a parameter value was 0 (e.g. 'no_dedupe' can be set to 0)
         - 'key' can only be set in new(), not overwritten in geocoding calls
+        - fix defined() parenthesization in http=>1 handling
+        documentation:
+        - document http=>1 and ua=>$ua parameters of new()
         - We documented user-agent string as "Geo::Coder::OpenCage/$VERSION" but in code it
            used space as delimiter. It's also set when another UA is supplied in new() as
            documented.
