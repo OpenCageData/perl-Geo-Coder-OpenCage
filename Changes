@@ -1,6 +1,10 @@
 Revision history for Geo-Coder-OpenCage
 
 unreleased
+        dependencies:
+        - bump HTTP::Tiny to 0.83 (shipped with Perl 5.38), pin previously unpinned versions
+        - move Scalar::Util to RuntimeRequires (was misclassified as test-only)
+        - drop Pod::Perldoc from RuntimeRequires (not actually used)
         code fixes:
         - valid_params list wasn't actually used
         - valid_params warned if a parameter value was 0 (e.g. 'no_dedupe' can be set to 0)
