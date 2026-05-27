@@ -1,6 +1,10 @@
 Revision history for Geo-Coder-OpenCage
 
 unreleased
+        code fixes:
+        - We documented user-agent string as "Geo::Coder::OpenCage/$VERSION" but in code it
+           used space as delimiter. It's also set when another UA is supplied in new() as
+           documented.
         tests:
         - no longer test against Perl < 5.38
         - connectivity check uses TCP/443 (requires no root)
