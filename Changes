@@ -1,6 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
-0.40    YYYY-MM-DD
+0.40    2026-04-01
+        - documenation: use "Agent Skill" terminology and link to the opencage-skills
+          repo root instead of a deep file path
 
 0.39    2026-04-01
         - better Agent Skill link in pod, no code changes
