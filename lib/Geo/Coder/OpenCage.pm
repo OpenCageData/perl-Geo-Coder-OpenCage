@@ -76,16 +76,16 @@ sub geocode {
     if (defined($params{location})) {
         $params{q} = delete $params{location};
     } else {
-        warn "location is a required parameter for geocode()";
+        carp "location is a required parameter for geocode()";
         return;
     }
 
     foreach my $k (keys %params) {
         if (!exists($valid_params{$k})) {
-            warn "Unknown geocode parameter: $k";
+            carp "Unknown geocode parameter: $k";
             delete $params{$k};
         } elsif ($valid_params{$k} == 0) { # is a real parameter but we dont support it
-            warn "Unsupported geocode parameter: $k";
+            carp "Unsupported geocode parameter: $k";
             delete $params{$k};
         }
     }
@@ -111,7 +111,7 @@ sub geocode {
     my $ok = eval { $rh_content = $self->{json}->decode($content); 1 };
     if (!$ok) {
         my $err = $@ || 'unknown error';
-        warn "failed to decode response from '" . $self->_sanitized_url($URL) . "': $err";
+        carp "failed to decode response from '" . $self->_sanitized_url($URL) . "': $err";
         return;
     }
 
@@ -119,7 +119,7 @@ sub geocode {
         my $status = $rh_content->{status} || {};
         my $code   = $status->{code}    // '?';
         my $msg    = $status->{message} // 'unknown error';
-        warn "response when requesting '" . $self->_sanitized_url($URL) . "': $code, $msg";
+        carp "response when requesting '" . $self->_sanitized_url($URL) . "': $code, $msg";
         return;
     }
     return $rh_content;
@@ -138,7 +138,7 @@ sub reverse_geocode {
 
     foreach my $k (qw(lat lng)) {
         if (!defined($params{$k})) {
-            warn "$k is a required parameter";
+            carp "$k is a required parameter";
             return;
         }
     }

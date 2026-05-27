@@ -6,7 +6,8 @@ use Test::More;
 # Perl::Critic also needs Pod::PlainText at runtime (pulled in by
 # Perl::Critic::Utils::POD). If it's missing every policy fails to load and
 # Test::Perl::Critic dies at import — we catch that and skip.
-eval { require Test::Perl::Critic; Test::Perl::Critic->import(-severity => 4); 1 }
+# severity and policy exclusions live in .perlcriticrc at the project root
+eval { require Test::Perl::Critic; Test::Perl::Critic->import(); 1 }
     or plan skip_all => "Test::Perl::Critic required: $@";
 
 all_critic_ok('lib');
