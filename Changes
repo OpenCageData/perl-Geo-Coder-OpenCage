@@ -5,6 +5,9 @@ unreleased
         - no longer test against Perl < 5.38
         - connectivity check uses TCP/443 (requires no root)
         - we pinged a stale hardcoded IP so some tests where always skipped
+        release tooling:
+        - abort (die) instead of warn on untracked files
+        - .gitignore: drop dead entries, ignore dotted dirs except .github
 
 0.40    2026-04-01
         - documenation: use "Agent Skill" terminology and link to the opencage-skills
