@@ -105,14 +105,10 @@ sub geocode {
     # print STDERR 'url: ' . $URL->as_string . "\n";
     my $response = $self->{ua}->get($URL);
 
-    # Support HTTP::Tiny and LWP:: CPAN packages
-    my $content = ( blessed $response and $response->isa('HTTP::Response') )
-        ? $response->decoded_content()
-        : $response->{content};
-
-    my $is_success = (ref($response) eq 'HTTP::Response')
-        ? $response->is_success()
-        : $response->{success};
+    # Support HTTP::Tiny and LWP:: CPAN packages (and subclasses of either).
+    my $is_lwp = blessed $response && $response->isa('HTTP::Response');
+    my $content    = $is_lwp ? $response->decoded_content() : $response->{content};
+    my $is_success = $is_lwp ? $response->is_success()      : $response->{success};
 
     my $rh_content;
     my $ok = eval { $rh_content = $self->{json}->decode($content); 1 };
