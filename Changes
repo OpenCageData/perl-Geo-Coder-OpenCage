@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-OpenCage
 
+0.41.1  2026-06-02
+        No changes. 0.41 failed to be released, this is the second attempt.
+
 0.41    2026-05-27
         dependencies:
         - bump HTTP::Tiny to 0.83 (shipped with Perl 5.38), pin previously unpinned versions
