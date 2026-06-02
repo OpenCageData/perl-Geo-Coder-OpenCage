@@ -1,7 +1,10 @@
 Revision history for Geo-Coder-OpenCage
 
-0.41.2  2026-06-02
+0.41.3  2026-06-02
         - only run Perl::Critic tests locally, not as part of perltesters
+
+0.41.2  2026-06-02
+        No changes.
 
 0.41.1  2026-06-02
         No changes. 0.41 failed to be released, this is the second attempt.
