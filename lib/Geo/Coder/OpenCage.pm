@@ -9,6 +9,7 @@ use HTTP::Tiny;
 use JSON::MaybeXS;
 use Scalar::Util 'blessed';
 use URI;
+use URI::QueryParam;
 
 my $version = our $VERSION || 'dev';
 my $ua_string = "Geo::Coder::OpenCage/$version";
@@ -131,9 +132,9 @@ sub geocode {
 # mask the API key in a URL before logging, so it doesn't leak into stderr
 sub _sanitized_url {
     my ($self, $url) = @_;
-    my $masked = substr($self->{api_key}, 0, 6) . '...';
-    (my $str = "$url") =~ s/\Q$self->{api_key}\E/$masked/g;
-    return $str;
+    my $masked = $url->clone;
+    $masked->query_param(key => substr($self->{api_key}, 0, 6) . '...');
+    return $masked->as_string;
 }
 
 sub reverse_geocode {
