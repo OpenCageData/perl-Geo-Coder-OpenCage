@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: '11 22 2 * *'
 
+permissions:
+  contents: read
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -15,14 +18,15 @@ jobs:
         version: ['5.38', '5.40', '5.42', '5.44']
 
     env:
-      PERL_CPANM_OPT: "--notest --force --skip-satisfied"
-      GEO_CODER_OPENCAGE_API_KEY: ${{ secrets.GEO_CODER_OPENCAGE_API_KEY }}
+      PERL_CPANM_OPT: "--notest --force --skip-satisfied --from https://www.cpan.org"
     name: Perl ${{ matrix.version }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
       - name: Set up perl
-        uses: shogo82148/actions-setup-perl@v1
+        uses: shogo82148/actions-setup-perl@eebc5c886de14ebbfcd2493d49a12007d2c30477 # v1.44.5
         with:
           perl-version: ${{ matrix.version }}
           install-modules-with: cpanm
@@ -37,9 +41,13 @@ jobs:
           dzil listdeps | xargs cpanm
 
       - name: Dzil tests
+        env:
+          GEO_CODER_OPENCAGE_API_KEY: ${{ secrets.GEO_CODER_OPENCAGE_API_KEY }}
         run: dzil test --author
 
       - name: Tests
+        env:
+          GEO_CODER_OPENCAGE_API_KEY: ${{ secrets.GEO_CODER_OPENCAGE_API_KEY }}
         run: |
           PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove -lrsv t
 
