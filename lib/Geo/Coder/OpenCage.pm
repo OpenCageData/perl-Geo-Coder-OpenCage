@@ -110,6 +110,12 @@ sub geocode {
     my $content    = $is_lwp ? $response->decoded_content() : $response->{content};
     my $is_success = $is_lwp ? $response->is_success()      : $response->{success};
 
+    if (my $error = _transport_error($response, $is_lwp)) {
+        $error =~ s/[[:cntrl:]]//g;
+        carp "request to '" . $self->_sanitized_url($URL) . "' failed: $error";
+        return;
+    }
+
     my $rh_content;
     my $ok = eval { $rh_content = $self->{json}->decode($content); 1 };
     if (!$ok) {
@@ -140,6 +146,19 @@ sub _sanitized_url {
     my $masked = $url->clone;
     $masked->query_param(key => substr($self->{api_key}, 0, 6) . '...');
     return $masked->as_string;
+}
+
+# the HTTP client's error message if no response arrived (connection, TLS, timeout)
+sub _transport_error {
+    my ($response, $is_lwp) = @_;
+    if ($is_lwp) {
+        my $warning = $response->header('Client-Warning') // '';
+        return $response->status_line if $warning eq 'Internal response';
+    }
+    elsif (($response->{status} // 0) == 599) {
+        return $response->{content};
+    }
+    return;
 }
 
 sub reverse_geocode {
