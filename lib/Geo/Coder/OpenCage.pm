@@ -118,8 +118,13 @@ sub geocode {
         return;
     }
 
+    if (ref($rh_content) ne 'HASH') {
+        carp "unexpected response from '" . $self->_sanitized_url($URL) . "': not a JSON object";
+        return;
+    }
+
     if (!$is_success) {
-        my $status = $rh_content->{status} || {};
+        my $status = ref($rh_content->{status}) eq 'HASH' ? $rh_content->{status} : {};
         # Cleanup server-supplied strings, e.g. new-lines
         my $code = ($status->{code}    // '?')             =~ s/[[:cntrl:]]//gr;
         my $msg  = ($status->{message} // 'unknown error') =~ s/[[:cntrl:]]//gr;
