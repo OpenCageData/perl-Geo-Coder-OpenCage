@@ -85,7 +85,7 @@ sub geocode {
 
     foreach my $k (keys %params) {
         if (!exists($valid_params{$k})) {
-            carp "Unknown geocode parameter: $k";
+            carp "Unknown geocode parameter: " . ($k =~ s/[[:cntrl:]]//gr);
             delete $params{$k};
         } elsif ($valid_params{$k} == 0) { # is a real parameter but we dont support it
             carp "Unsupported geocode parameter: $k";
